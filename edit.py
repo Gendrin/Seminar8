@@ -12,15 +12,22 @@ def seq(nameTable):
     else:
         return seq+1
 
-def InsertTable(nameTable,inData):
+def InsertTable(nameTable,inData,typeIn):
     if inData!=None:
         connect = sqlite3.connect('barbershop.db')
         cursor = connect.cursor()
-        if nameTable == 'users' or 'records' or 'orders':
-            cursor.execute("INSERT INTO {0} VALUES(?, ?, ?, ?, ?);".format(nameTable), inData)
-        elif nameTable == 'service':
-            cursor.execute("INSERT INTO {0} VALUES(?, ?, ?);".format(nameTable), inData)
-        connect.commit()
+        if typeIn:
+            if nameTable == 'users' or 'records' or 'orders':
+                cursor.execute("INSERT INTO {0} VALUES(?, ?, ?, ?, ?);".format(nameTable), inData)
+            elif nameTable == 'service':
+                cursor.execute("INSERT INTO {0} VALUES(?, ?, ?);".format(nameTable), inData)
+            connect.commit()
+        else:
+            if nameTable == 'users' or 'records' or 'orders':
+                cursor.executemany("INSERT INTO {0} VALUES(?, ?, ?, ?, ?);".format(nameTable), inData)
+            elif nameTable == 'service':
+                cursor.executemany("INSERT INTO {0} VALUES(?, ?, ?);".format(nameTable), inData)
+            connect.commit()
         connect.close()
     else:
         print('Введены некорректные данные! Добавление записи в таблицу отменено.')
@@ -158,6 +165,7 @@ def InsertUser():
         print(inData)
         return inData
     else: return None
+
 def EditUser():
     resultFind = FindInTable('users', InsertDataForSearch('users'))
     if resultFind!=None:
@@ -173,6 +181,21 @@ def DeleteUser():
         if resultFind[0] != None:
             print(f'Удаляемые данные {resultFind[1]}')
             DeletRecord('users', resultFind[0])
+
+#InsetTable есть но нужно сформированному списку кортежей добавить id
+def PrepareImportList(inData):
+    result=[]
+    newId=seq('users')
+    for i in inData:
+        tempList=[]
+        tempList.append(str(newId))
+        for j in i:
+            tempList.append(j)
+        newId+=1
+        result.append(tuple(tempList))
+    return result
+    #print(newResult)
+
 
 
 exp = ViewExpTable('users')

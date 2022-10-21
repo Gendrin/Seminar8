@@ -23,8 +23,19 @@ def importFile(nameFile):
             impFile.close()
         return listTuple
 
-#result = importFile('usersImp.csv')
+result = importFile('usersImp.csv')
 #
 #
-# print()
-# print(result)
+print()
+print(result)
+
+newId=5
+newResult=[]
+for i in result:
+    tempList=[]
+    tempList.append(str(newId))
+    for j in i:
+        tempList.append(j)
+    newId+=1
+    newResult.append(tuple(tempList))
+print(newResult)

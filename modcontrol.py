@@ -7,7 +7,7 @@ import impfile as impf
 
 
 def Operation(code_op):
-    if code_op =='1': me.InsertTable('users',me.InsertUser())
+    if code_op =='1': me.InsertTable('users',me.InsertUser(),True)
     elif code_op =='2':
         print('Редактируем пользователя! Задайте критерии поиска!')
         me.EditUser()
@@ -19,7 +19,10 @@ def Operation(code_op):
         me.ViewExpTable('users')
     elif code_op =='5':
         print('Импорт пользователей из файла в базу!!')
-        #impf.importFile('usersImp')
+        me.InsertTable('users',me.PrepareImportList(impf.importFile('usersImp.csv')),False)
+        #me.PrepareImportList(impf.importFile('usersImp.csv'))
+        #impf.importFile('usersImp.csv')
+        #impf.importFile(input('Введите имя файла для импорта: -> usersImp.csv'))
     elif code_op =='6':
         print('Экспорт пользователей информационной системы в файл!!')
         exp.exportFile('users',me.ViewExpTable('users'))
