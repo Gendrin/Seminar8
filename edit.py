@@ -1,5 +1,6 @@
 # Добавление / Удаление / Редактирование записей БД
 import sqlite3
+import logg as lg
 
 def seq(nameTable):
     connect = sqlite3.connect('barbershop.db')
@@ -19,12 +20,18 @@ def InsertTable(nameTable,inData,typeIn):
         if typeIn:
             if nameTable == 'users' or 'records' or 'orders':
                 cursor.execute("INSERT INTO {0} VALUES(?, ?, ?, ?, ?);".format(nameTable), inData)
+                lg.inStringLog('Добавлен пользователь: ' + " ".join([str(inData[i]) \
+                    for i in range(len(inData)) if i != 0]))
             elif nameTable == 'service':
                 cursor.execute("INSERT INTO {0} VALUES(?, ?, ?);".format(nameTable), inData)
             connect.commit()
         else:
             if nameTable == 'users' or 'records' or 'orders':
                 cursor.executemany("INSERT INTO {0} VALUES(?, ?, ?, ?, ?);".format(nameTable), inData)
+                for tuple_data in inData:
+                    lg.inStringLog('Добавлен пользователь: ' + " ".join(\
+                        [str(tuple_data[i]) for i in range(len(tuple_data)) if i != 0]))
+
             elif nameTable == 'service':
                 cursor.executemany("INSERT INTO {0} VALUES(?, ?, ?);".format(nameTable), inData)
             connect.commit()
@@ -197,10 +204,20 @@ def PrepareImportList(inData):
     #print(newResult)
 
 
+test=('1','qqq','wwww',123,'1')
 
-exp = ViewExpTable('users')
+str1 = 'Добавлен пользователь: '+" ".join([str(test[i]) for i in range(len(test)) if i!=0])
+print(str1)
 print()
-print(exp)
+list_data=[('1','qqq','wwww',123,'1'),('2','eee','wwwqw',1223,'0')]
+for tuple_data in list_data:
+    print('Добавлен пользователь: '+" ".join([str(tuple_data[i]) for i in range(len(tuple_data)) if i != 0]))
+    #print(str2)
+    #str1 = 'Добавлен пользователь: ' + " ".join([str(test[i]) for i in range(len(test)) if i != 0])
+    #print(str1)
+# exp = ViewExpTable('users')
+# print()
+# print(exp)
 # test=InsertDataForSearch('users')
 # test=FindInTable('sers',test)
 # print(test)
