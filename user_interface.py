@@ -2,10 +2,10 @@ import modcontrol as mc
 def StartMenu():
     print("Barbershop welcomes you!\n\n\n")
     print("Working with:\n")
-    print("1 - Pre-registration - Предварительная запись на услугу\n")
-    print("2 - Complite orders - - Оформление/просмотр выполненных работ\n")
+    print("No Work 1 - Pre-registration - Предварительная запись на услугу\n")
+    print("No Work 2 - Complite orders - - Оформление/просмотр выполненных работ\n")
     print("3 - Add base Client\Master - Конфигурирование пользователей в системе Клиенты/Мастера\n")
-    print("4 - Configurate service - Конфигурирование оказываемых услуг\n")
+    print("No work4 - Configurate service - Конфигурирование оказываемых услуг\n")
     print("0 - exit\n")
     chk=input()
     if chk=='1': print('Меню предварительной записи в разработке')
