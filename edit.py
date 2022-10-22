@@ -204,13 +204,13 @@ def PrepareImportList(inData):
     #print(newResult)
 
 
-test=('1','qqq','wwww',123,'1')
-
-str1 = 'Добавлен пользователь: '+" ".join([str(test[i]) for i in range(len(test)) if i!=0])
-print(str1)
-print()
-list_data=[('1','qqq','wwww',123,'1'),('2','eee','wwwqw',1223,'0')]
-for tuple_data in list_data:
+# test=('1','qqq','wwww',123,'1')
+#
+# str1 = 'Добавлен пользователь: '+" ".join([str(test[i]) for i in range(len(test)) if i!=0])
+# print(str1)
+# print()
+# list_data=[('1','qqq','wwww',123,'1'),('2','eee','wwwqw',1223,'0')]
+# for tuple_data in list_data:
     print('Добавлен пользователь: '+" ".join([str(tuple_data[i]) for i in range(len(tuple_data)) if i != 0]))
     #print(str2)
     #str1 = 'Добавлен пользователь: ' + " ".join([str(test[i]) for i in range(len(test)) if i != 0])
